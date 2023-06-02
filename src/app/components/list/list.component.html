@@ -1,0 +1,43 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Обращение</th>
+        <button (click)="clearPersons()" type="button" class="btn btn-warning">Clear</button>
+        <button (click)="add=!add" type="button" class="btn btn-warning">Add</button>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of persons; let i = index">
+        
+        <th scope="row">{{i+1}}</th> 
+
+        <td>{{item.name}}</td>
+        <td>{{item.surname}}</td>
+        <td>{{item.nick}}</td>
+        <button (click)="removePerson(item.id)" type="button" class="btn btn-danger">Delete</button>        
+        <button (click)="editPerson(item)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Edit
+        </button>
+        
+        
+      </tr> 
+           
+    </tbody>
+     
+  </table>
+  <form action="" *ngIf="edit" (submit)="addEditPerson()">
+          <input  type="text" name="name" [(ngModel)]="person.name" placeholder="{{person.name}}">   
+          <input type="text" name="surName" [(ngModel)]="person.surname" placeholder="{{person.surname}}">   
+          <input type="text" name="nick" [(ngModel)]="person.nick" placeholder="{{person.nick}}">        
+          <button type="submit"  class="btn btn-success">Edit</button>
+        </form>  
+<form (submit)="addPerson()" *ngIf="add">
+  <input type="text" name="name" [(ngModel)]="person.name">   
+  <input type="text" name="surName" [(ngModel)]="person.surname">   
+  <input type="text" name="nick" [(ngModel)]="person.nick">        
+  <button type="submit"  class="btn btn-success">Add</button>
+</form>
